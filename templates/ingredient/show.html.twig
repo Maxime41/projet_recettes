@@ -114,16 +114,8 @@
     	{% endif %}
 		<div class="flex">
 			<h1>
-				Ingredients et prix
+				Visualisation de l'ingredient
 			</h1>
-			<div class="vertical">
-				<a class="button-9 blue" href="{{ path('ingredient.create_and_store_v3') }}">
-					Créer un ingrédient
-				</a>
-				<a href="{{ path('app_ingredient') }}">
-					<img src="{{ asset('images/CHIEF.jpg') }}" alt="LE CHEF"/>
-				</a>
-			</div>
 		</div>
 
 		<table>
@@ -140,8 +132,11 @@
 				<th>
 					Date de création
 				</th>
-				<th colspan="2" class="center">
-					Actions
+				<th>
+					slug
+				</th>
+                <th>
+					date update
 				</th>
 			</tr>
 			{% for key, ingredient in ingredients %}
@@ -158,19 +153,11 @@
 					<td>
 						{{ingredient.getDateCreation|date("Y-m-d")}} 
 					</td>
-					<td>
-						<a class="button-9 yellow" href="{{ path('ingredient.edit', {id: ingredient.id}) }}">
-							Modifier
-						</a>
-						{# Bouton Modifier #}
+                    <td>
+						{{ingredient.slug}}
 					</td>
-					<td>
-						<form action="{{ path('ingredient.delete', {id: ingredient.id}) }}" method="POST">
-							<input type="hidden" name="_method" value="DELETE">
-							<input
-							class="button-9 red" type="submit" value="Supprimer"/>
-						{# Bouton Supprimer #}
-						</form>
+                    <td>
+						{{ingredient.getUpdatedAt|date("Y-m-d")}}
 					</td>
 				</tr>
 			{% endfor %}

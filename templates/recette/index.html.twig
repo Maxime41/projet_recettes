@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IngredientController!
+{% block title %}Hello RecetteController!
 {% endblock %}
 
 {% block body %}
@@ -107,19 +107,11 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-		{% if app.user %}
-        	<div class="mb-3">
-            	<a href="{{ path('app_logout') }}"> Me déconnecter : ( {{ app.user.userIdentifier }} ) </a>
-        	</div>
-    	{% endif %}
 		<div class="flex">
 			<h1>
-				Ingredients et prix
+				Recettes et ingrédients
 			</h1>
 			<div class="vertical">
-				<a class="button-9 blue" href="{{ path('ingredient.create_and_store_v3') }}">
-					Créer un ingrédient
-				</a>
 				<a href="{{ path('app_ingredient') }}">
 					<img src="{{ asset('images/CHIEF.jpg') }}" alt="LE CHEF"/>
 				</a>
@@ -127,50 +119,65 @@
 		</div>
 
 		<table>
-			<tr>
+			<tr class="yellow">
 				<th>
-					N °
+					N ° Recette
 				</th>
 				<th>
 					Nom
 				</th>
 				<th>
-					Prix(EUR)
+					Temps (minutes)
 				</th>
 				<th>
 					Date de création
 				</th>
-				<th colspan="2" class="center">
-					Actions
+				<th>
+					Date de modification
 				</th>
+                <th>
+					description
+				</th>
+                <th>
+					Prix (EUR)
+				</th>
+                <th>
+					Difficulté
+				</th>
+                <th>
+					Liste des ingrédients liés à la recette
+				</th>                                
 			</tr>
-			{% for key, ingredient in ingredients %}
+			{% for key, recette in recettes %}
 				<tr>
 					<td>
-						{{key}}
+						{{recette.id}}
 					</td>
 					<td>
-						{{ingredient.nom}}
+						{{recette.nom}}
 					</td>
 					<td>
-						<b>{{ingredient.prix}}</td>
+						<b>{{recette.temps}}</td>
 					</td>
 					<td>
-						{{ingredient.getDateCreation|date("Y-m-d")}} 
+						{{recette.getCreatedAt|date("Y-m-d")}} 
 					</td>
-					<td>
-						<a class="button-9 yellow" href="{{ path('ingredient.edit', {id: ingredient.id}) }}">
-							Modifier
-						</a>
-						{# Bouton Modifier #}
+                    <td>
+						{{recette.getUpdatedAt|date("Y-m-d")}} 
 					</td>
-					<td>
-						<form action="{{ path('ingredient.delete', {id: ingredient.id}) }}" method="POST">
-							<input type="hidden" name="_method" value="DELETE">
-							<input
-							class="button-9 red" type="submit" value="Supprimer"/>
-						{# Bouton Supprimer #}
-						</form>
+                    <td>
+						{{recette.description}} 
+					</td>
+                    <td>
+						{{recette.prix}} 
+					</td>
+                    <td>
+                        {{recette.difficulte}}
+                    </td>
+                    <td>
+                        {% for ingredient in recette.getIngredients %}
+						    {{ ingredient.nom}}
+                        {% endfor %} 
 					</td>
 				</tr>
 			{% endfor %}
