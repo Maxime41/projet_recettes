@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IngredientController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th,
+		td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #DDD;
+		}
+
+		tr:hover {
+			background-color: #D6EEEE;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>
+			Ingrédients et prix
+		</h1>
+
+		<table>
+            <tr>
+                <th> N ° </th>
+                <th> Nom </th>
+                <th> Prix(EUR) </th>
+                <th> Date de création </th>
+            </tr>
+			{% for key, ingrédient in ingrédients %}
+            <tr>
+				<td>
+                    {{key}}
+				</td>
+                <td>
+					{{ingrédient.nom}}
+                </td>
+                <td>
+					<b>{{ingrédient.prix}}
+                </td>
+                <td>
+                    {{ingrédient.dateCreation|date("m/d/Y")}}
+                </td>
+            </tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}
