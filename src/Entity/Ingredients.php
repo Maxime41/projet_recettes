@@ -55,6 +55,7 @@ class Ingredients
 
     #[ORM\ManyToMany(targetEntity: Recette::class, mappedBy: 'ingredients')]
     private Collection $recette;
+    
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
