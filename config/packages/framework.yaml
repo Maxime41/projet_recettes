@@ -1,5 +1,19 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
+    http_client:
+        scoped_clients:
+            example_api:
+                base_uri: 'https://example.com/'
+
+                # HTTP Basic authentication
+                auth_basic: 'the-username:the-password'
+
+                # HTTP Bearer authentication (also called token authentication)
+                auth_bearer: the-bearer-token
+
+                # Microsoft NTLM authentication
+                auth_ntlm: 'the-username:the-password'
+                
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
     http_method_override: true
