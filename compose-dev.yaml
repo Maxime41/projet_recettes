@@ -10,3 +10,10 @@ services:
       source: /var/run/docker.sock
       target: /var/run/docker.sock
 
+  maildev:
+    image: mailhog/mailhog
+    container_name: osef
+    restart: always
+    ports:
+      - "0:8025"
+
