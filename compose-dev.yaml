@@ -15,5 +15,5 @@ services:
     container_name: osef
     restart: always
     ports:
-      - "0:8025"
+      - "37000:8025"
 
